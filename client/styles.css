@@ -85,7 +85,7 @@ button, .card, .vaga-item {
 }
 
 .header-content {
-  max-width: 1200px;
+  max-width: 1600px;
   margin: 0 auto;
   padding: 0 16px;
   display: flex;
@@ -182,7 +182,7 @@ button, .card, .vaga-item {
    LAYOUT PRINCIPAL (MOBILE FIRST)
    ============================================================ */
 .container {
-  max-width: 1200px;
+  max-width: 1600px;
   margin: 0 auto;
   padding: 0 16px 32px;
   display: grid;
@@ -722,7 +722,7 @@ body[data-perfil="estudante"] .container {
 }
 
 .footer-content {
-  max-width: 1200px;
+  max-width: 1600px;
   margin: 0 auto;
   padding: 0 16px;
   display: flex;
@@ -768,7 +768,7 @@ body[data-perfil="estudante"] .container {
 }
 
 .footer-bottom {
-  max-width: 1200px;
+  max-width: 1600px;
   margin: 20px auto 0;
   padding: 16px 16px 0;
   border-top: 1px solid rgba(255, 255, 255, 0.08);
