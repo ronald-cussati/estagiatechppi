@@ -37,7 +37,36 @@ interface IVaga {
   area: string;
   dataCriacao: string;
 }
-let vagas: IVaga[] = [];
+let vagas: IVaga[] = [
+  {
+    id: "vaga-1",
+    titulo: "Estágio em Desenvolvimento Frontend",
+    empresa: "Bradesco",
+    area: "Frontend",
+    dataCriacao: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000).toISOString() // 3 dias atrás
+  },
+  {
+    id: "vaga-2",
+    titulo: "Estágio em Engenharia de Dados",
+    empresa: "Itaú Unibanco",
+    area: "Data",
+    dataCriacao: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString() // 2 dias atrás
+  },
+  {
+    id: "vaga-3",
+    titulo: "Estágio em Desenvolvimento Backend",
+    empresa: "Ambev Tech",
+    area: "Backend",
+    dataCriacao: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000).toISOString() // 1 dia atrás
+  },
+  {
+    id: "vaga-4",
+    titulo: "Estágio em Desenvolvimento Mobile",
+    empresa: "Localiza",
+    area: "Mobile",
+    dataCriacao: new Date().toISOString()
+  }
+];
 
 // "Tabela" de Candidaturas
 interface ICandidatura {
@@ -53,7 +82,34 @@ interface ICandidatura {
   status: 'Em análise' | 'Aprovado' | 'Rejeitado'; // Status controlados
   dataCandidatura: string;
 }
-let candidaturas: ICandidatura[] = [];
+let candidaturas: ICandidatura[] = [
+  {
+    id: "cand-1",
+    idVaga: "vaga-1",
+    nomeCandidato: "Lucas Silva",
+    idade: "21",
+    curso: "Ciência da Computação",
+    periodo: "4º Período",
+    email: "lucas.silva@estudante.ufmg.br",
+    github: "https://github.com/lucassilva",
+    linkedin: "https://linkedin.com/in/lucassilva",
+    status: "Em análise",
+    dataCandidatura: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000).toISOString()
+  },
+  {
+    id: "cand-2",
+    idVaga: "vaga-1",
+    nomeCandidato: "Beatriz Oliveira",
+    idade: "20",
+    curso: "Sistemas de Informação",
+    periodo: "3º Período",
+    email: "beatriz.oliveira@estudante.com",
+    github: "https://github.com/beatriz-oli",
+    linkedin: "",
+    status: "Aprovado",
+    dataCandidatura: new Date().toISOString()
+  }
+];
 
 
 // =========================================================================
