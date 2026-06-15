@@ -130,37 +130,32 @@ button, .card, .vaga-item {
 .role-selector {
   display: flex;
   align-items: center;
-  gap: 8px;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  background: #1e293b;
-  padding: 12px 16px;
-  z-index: 1000;
-  box-shadow: 0 -4px 12px rgba(0,0,0,0.15);
-  /* Safe area fallback on mobile */
-  padding-bottom: calc(12px + env(safe-area-inset-bottom, 0)); 
+  gap: 6px;
+  background: rgba(0,0,0,0.25); /* Fundo sutil pro seletor */
+  padding: 4px 8px;
+  border-radius: 30px;
+  backdrop-filter: blur(4px);
 }
 
 .role-selector span { 
-  display: none; /* Ocultar "Acessando como" no mobile */
+  font-size: 12px; 
+  font-weight: 500; 
+  margin-right: 2px; 
+  color: #cbd5e1; 
 }
 
 .role-btn {
   background: transparent;
   border: none;
   color: #94a3b8;
-  padding: 10px 12px;
-  border-radius: 8px;
-  font-size: 14px;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 12px;
   font-weight: 600;
   cursor: pointer;
   display: flex;
   align-items: center;
-  justify-content: center;
-  flex: 1;
-  gap: 6px;
+  gap: 4px;
 }
 
 .role-btn:hover { 
@@ -172,11 +167,6 @@ button, .card, .vaga-item {
   background: #fff;
   color: #1e293b;
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-}
-
-/* Espaçamento extra no body para compensar a nav fixa em mobile */
-body {
-  padding-bottom: 70px;
 }
 
 /* ============================================================
@@ -648,35 +638,13 @@ body[data-perfil="estudante"] .container {
     font-size: 14px;
   }
   
-  .role-selector {
-    position: static;
-    width: auto;
-    background: rgba(0,0,0,0.25);
-    padding: 4px 8px;
-    border-radius: 30px;
-    backdrop-filter: blur(4px);
-    box-shadow: none;
-  }
-  
   .role-selector span {
-    display: inline;
     font-size: 13px;
-    font-weight: 500;
-    margin-right: 2px;
-    color: #cbd5e1;
   }
   
   .role-btn {
-    flex: none;
     font-size: 13px;
     padding: 8px 16px;
-    border-radius: 20px;
-    justify-content: flex-start;
-  }
-  
-  /* Reset do padding-bottom no desktop */
-  body {
-    padding-bottom: 0;
   }
 
   .container {
