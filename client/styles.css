@@ -110,7 +110,8 @@ button, .card, .vaga-item {
 }
 
 .header-logo-icon {
-  color: #fbbf24; /* Um amarelo-manteiga para se destacar no header azul */
+  width: 28px;
+  height: 28px;
   flex-shrink: 0;
 }
 
@@ -129,32 +130,37 @@ button, .card, .vaga-item {
 .role-selector {
   display: flex;
   align-items: center;
-  gap: 6px;
-  background: rgba(0,0,0,0.25); /* Fundo sutil pro seletor */
-  padding: 4px 8px;
-  border-radius: 30px;
-  backdrop-filter: blur(4px);
+  gap: 8px;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: #1e293b;
+  padding: 12px 16px;
+  z-index: 1000;
+  box-shadow: 0 -4px 12px rgba(0,0,0,0.15);
+  /* Safe area fallback on mobile */
+  padding-bottom: calc(12px + env(safe-area-inset-bottom, 0)); 
 }
 
 .role-selector span { 
-  font-size: 12px; 
-  font-weight: 500; 
-  margin-right: 2px; 
-  color: #cbd5e1; 
+  display: none; /* Ocultar "Acessando como" no mobile */
 }
 
 .role-btn {
   background: transparent;
   border: none;
   color: #94a3b8;
-  padding: 6px 12px;
-  border-radius: 20px;
-  font-size: 12px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-size: 14px;
   font-weight: 600;
   cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 4px;
+  justify-content: center;
+  flex: 1;
+  gap: 6px;
 }
 
 .role-btn:hover { 
@@ -166,6 +172,11 @@ button, .card, .vaga-item {
   background: #fff;
   color: #1e293b;
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+/* Espaçamento extra no body para compensar a nav fixa em mobile */
+body {
+  padding-bottom: 70px;
 }
 
 /* ============================================================
@@ -637,13 +648,35 @@ body[data-perfil="estudante"] .container {
     font-size: 14px;
   }
   
+  .role-selector {
+    position: static;
+    width: auto;
+    background: rgba(0,0,0,0.25);
+    padding: 4px 8px;
+    border-radius: 30px;
+    backdrop-filter: blur(4px);
+    box-shadow: none;
+  }
+  
   .role-selector span {
+    display: inline;
     font-size: 13px;
+    font-weight: 500;
+    margin-right: 2px;
+    color: #cbd5e1;
   }
   
   .role-btn {
+    flex: none;
     font-size: 13px;
     padding: 8px 16px;
+    border-radius: 20px;
+    justify-content: flex-start;
+  }
+  
+  /* Reset do padding-bottom no desktop */
+  body {
+    padding-bottom: 0;
   }
 
   .container {
@@ -696,23 +729,11 @@ body[data-perfil="estudante"] .container {
    RODAPÉ (FOOTER)
    ============================================================ */
 .footer {
-  background: var(--header-bg);
+  background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
   color: var(--header-text);
   padding: 30px 0 20px;
   margin-top: 40px;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
-  position: relative;
-  overflow: hidden;
-}
-
-.footer::after {
-  content: "";
-  position: absolute;
-  top: 0; left: 0; width: 100%; height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.03), transparent);
-  background-size: 200% 100%;
-  animation: shimmer 10s infinite linear;
-  pointer-events: none;
 }
 
 .footer-content {
@@ -748,22 +769,17 @@ body[data-perfil="estudante"] .container {
   justify-content: center;
 }
 
-.btn-footer-link {
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  color: #f1f5f9;
-  padding: 8px 16px;
-  border-radius: 20px;
-  font-size: 12px;
-  font-weight: 600;
+.integrantes-link {
+  color: #94a3b8;
+  font-size: 13px;
+  text-decoration: underline;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: color 0.2s;
+  padding: 4px;
 }
 
-.btn-footer-link:hover {
-  background: #fff;
-  color: #1e293b;
-  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
+.integrantes-link:hover {
+  color: #cbd5e1;
 }
 
 .footer-bottom {
