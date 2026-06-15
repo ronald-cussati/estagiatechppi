@@ -6,3 +6,6 @@ ANTIGRAVITY_CONTEXT.md
 .gemini/
 dist/
 server/dist/
+
+favicon/
+favicon.zip
