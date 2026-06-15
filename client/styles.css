@@ -199,7 +199,6 @@ body[data-perfil="estudante"] .only-empresa {
 
 body[data-perfil="estudante"] .container {
   grid-template-columns: 1fr;
-  max-width: 900px; 
 }
 
 /* ============================================================
@@ -800,7 +799,10 @@ body[data-perfil="estudante"] .container {
 
   body[data-perfil="estudante"] .container {
     grid-template-columns: 1fr;
-    max-width: 900px;
+  }
+
+  .vagas-grid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   }
 
   .form-card {
@@ -808,3 +810,30 @@ body[data-perfil="estudante"] .container {
     top: 20px;
   }
 }
+
+/* ============================================================
+   CORES DE FILTROS E BADGES
+   ============================================================ */
+/* Frontend (Azul) */
+.filter-btn[data-filter="Frontend"]:hover { border-color: #2563eb; color: #2563eb; }
+.filter-btn[data-filter="Frontend"].active { background: #2563eb; color: white; border-color: #2563eb; }
+.vaga-area.area-frontend { background-color: #eff6ff; color: #2563eb; border-color: #bfdbfe; }
+
+/* Backend (Verde) */
+.filter-btn[data-filter="Backend"]:hover { border-color: #059669; color: #059669; }
+.filter-btn[data-filter="Backend"].active { background: #059669; color: white; border-color: #059669; }
+.vaga-area.area-backend { background-color: #ecfdf5; color: #059669; border-color: #a7f3d0; }
+
+/* Data (Roxo) */
+.filter-btn[data-filter="Data"]:hover { border-color: #7c3aed; color: #7c3aed; }
+.filter-btn[data-filter="Data"].active { background: #7c3aed; color: white; border-color: #7c3aed; }
+.vaga-area.area-data { background-color: #f5f3ff; color: #7c3aed; border-color: #ddd6fe; }
+
+/* Mobile (Laranja) */
+.filter-btn[data-filter="Mobile"]:hover { border-color: #ea580c; color: #ea580c; }
+.filter-btn[data-filter="Mobile"].active { background: #ea580c; color: white; border-color: #ea580c; }
+.vaga-area.area-mobile { background-color: #fff7ed; color: #ea580c; border-color: #fed7aa; }
+
+/* Todos (Padrão Azul LinkedIn) */
+.filter-btn[data-filter="Todos"]:hover { border-color: var(--btn-primary); color: var(--btn-primary); }
+.filter-btn[data-filter="Todos"].active { background: var(--btn-primary); color: white; border-color: var(--btn-primary); }

@@ -490,7 +490,7 @@ function renderVagas() {
         else {
             acoesHtml = "\n        <span class=\"candidatos-count\" onclick=\"abrirModalEmpresa('".concat(vaga.id, "')\">\n          ").concat(vaga.candidatos || 0, " curr\u00EDculos recebidos\n        </span>\n        <div class=\"vaga-actions\">\n          <button class=\"btn-icon\" onclick=\"prepararEdicao('").concat(vaga.id, "')\" title=\"Editar\">").concat(iconeEdit, "</button>\n          <button class=\"btn-icon\" onclick=\"deletarVaga('").concat(vaga.id, "')\" title=\"Excluir\">").concat(iconeTrash, "</button>\n        </div>\n      ");
         }
-        var htmlCard = "\n      <article class=\"vaga-item\">\n        <h3 class=\"vaga-title\">".concat(vaga.titulo, "</h3>\n        <p class=\"vaga-empresa\">").concat(vaga.empresa, "</p>\n        <span class=\"vaga-area\">").concat(vaga.area, "</span>\n        \n        <div class=\"vaga-footer\">\n          <span class=\"vaga-date\">").concat(formatarData(vaga.dataCriacao), "</span>\n          ").concat(acoesHtml, "\n        </div>\n      </article>\n    ");
+        var htmlCard = "\n      <article class=\"vaga-item\">\n        <h3 class=\"vaga-title\">".concat(vaga.titulo, "</h3>\n        <p class=\"vaga-empresa\">").concat(vaga.empresa, "</p>\n        <span class=\"vaga-area area-").concat(vaga.area.toLowerCase(), "\">").concat(vaga.area, "</span>\n        \n        <div class=\"vaga-footer\">\n          <span class=\"vaga-date\">").concat(formatarData(vaga.dataCriacao), "</span>\n          ").concat(acoesHtml, "\n        </div>\n      </article>\n    ");
         // Injeta na div do grid como 'último filho'
         listaVagas.insertAdjacentHTML('beforeend', htmlCard);
     });

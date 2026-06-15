@@ -463,7 +463,7 @@ function renderVagas() {
       <article class="vaga-item">
         <h3 class="vaga-title">${vaga.titulo}</h3>
         <p class="vaga-empresa">${vaga.empresa}</p>
-        <span class="vaga-area">${vaga.area}</span>
+        <span class="vaga-area area-${vaga.area.toLowerCase()}">${vaga.area}</span>
         
         <div class="vaga-footer">
           <span class="vaga-date">${formatarData(vaga.dataCriacao)}</span>
