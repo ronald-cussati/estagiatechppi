@@ -1,22 +1,21 @@
 /* ============================================================
-   VARIÁVEIS DARK MODE & NEON (Aesthetics)
+   VARIÁVEIS - TEMA BÁSICO (AMARELO/LARANJA)
    ============================================================ */
 :root {
-  --bg-color: #0f111a;
-  --header-bg: rgba(26, 32, 44, 0.7);
-  --text-primary: #f8fafc;
-  --text-secondary: #94a3b8;
-  --border-color: rgba(255, 255, 255, 0.1);
-  --card-bg: rgba(30, 41, 59, 0.6);
-  --btn-primary: #8b5cf6;
-  --btn-primary-hover: #7c3aed;
+  --bg-color: #fcfcfc;
+  --header-bg: #f59e0b;
+  --header-text: #ffffff;
   
-  --badge-bg: rgba(139, 92, 246, 0.2);
-  --badge-text: #c4b5fd;
+  --text-primary: #1e293b;
+  --text-secondary: #64748b;
+  --border-color: #e2e8f0;
+  --card-bg: #ffffff;
   
-  --radius: 12px;
-  --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
-  --glow: 0 0 15px rgba(139, 92, 246, 0.3);
+  --btn-primary: #f59e0b;
+  --btn-primary-hover: #d97706;
+  
+  --radius: 8px;
+  --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
 }
 
 /* ============================================================
@@ -34,31 +33,17 @@ body {
   color: var(--text-primary);
   line-height: 1.5;
   min-height: 100vh;
-  /* Fundo sutil texturizado escuro */
-  background-image: radial-gradient(circle at top right, #1e1b4b 0%, var(--bg-color) 40%);
-}
-
-/* ============================================================
-   GLASSMORPHISM UTILS
-   ============================================================ */
-.glass {
-  background: var(--card-bg);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid var(--border-color);
 }
 
 /* ============================================================
    HEADER & SELETOR DE PERFIL
    ============================================================ */
 .header {
-  color: white;
+  background: linear-gradient(to right, #f59e0b, #fbbf24);
+  color: var(--header-text);
   padding: 20px 0;
   margin-bottom: 32px;
-  border-bottom: 1px solid var(--border-color);
-  position: sticky;
-  top: 0;
-  z-index: 50;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 .header-content {
@@ -75,52 +60,50 @@ body {
 .logo-area h1 {
   font-size: 24px;
   font-weight: 700;
-  background: linear-gradient(to right, #a78bfa, #2dd4bf);
-  -webkit-background-clip: text;
-  color: transparent;
+  color: #fff;
 }
 
 .logo-area p {
   font-size: 14px;
-  color: var(--text-secondary);
+  color: #fffaf0;
 }
 
 .role-selector {
   display: flex;
   align-items: center;
   gap: 8px;
-  background: rgba(0,0,0,0.3);
+  background: rgba(255,255,255,0.2);
   padding: 6px 12px;
   border-radius: 30px;
-  border: 1px solid var(--border-color);
 }
 
 .role-selector span {
-  font-size: 12px;
-  color: var(--text-secondary);
+  font-size: 13px;
+  font-weight: 500;
   margin-right: 4px;
 }
 
 .role-btn {
   background: transparent;
   border: none;
-  color: var(--text-secondary);
+  color: #fff;
   padding: 6px 14px;
   border-radius: 20px;
   font-size: 13px;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 4px;
 }
 
 .role-btn.active {
-  background: rgba(255, 255, 255, 0.1);
-  color: white;
-  box-shadow: var(--shadow);
+  background: #fff;
+  color: #d97706;
 }
 
 /* ============================================================
-   LAYOUT PRINCIPAL E CONDICIONAL DE PERFIL
+   LAYOUT PRINCIPAL
    ============================================================ */
 .container {
   max-width: 1200px;
@@ -130,47 +113,48 @@ body {
   grid-template-columns: 320px 1fr;
   gap: 32px;
   align-items: start;
-  transition: all 0.4s ease;
 }
 
-/* Quando logado como estudante, a sidebar some e o container fica largo */
-body[data-perfil="estudante"] .only-empresa {
-  display: none;
-}
+body[data-perfil="estudante"] .only-empresa { display: none; }
 body[data-perfil="estudante"] .container {
   grid-template-columns: 1fr;
-  max-width: 900px; /* Centraliza melhor a lista sozinha */
+  max-width: 900px; 
 }
 
-/* Elementos exclusivos de Estudante/Empresa em outras áreas */
-body[data-perfil="estudante"] .show-empresa { display: none; }
-body[data-perfil="empresa"] .show-estudante { display: none; }
-
 /* ============================================================
-   FORMULÁRIO (Coluna Esquerda)
+   FORMULÁRIO E CARDS
    ============================================================ */
+.card {
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow);
+}
+
 .form-card {
   padding: 24px;
-  border-radius: var(--radius);
-  position: sticky;
-  top: 100px;
-  box-shadow: var(--shadow);
 }
 
 .form-card h2 {
   font-size: 18px;
   margin-bottom: 24px;
-  color: white;
+  color: var(--text-primary);
 }
 
 .form-group {
   margin-bottom: 16px;
+  flex: 1;
+}
+
+.form-group-row {
+  display: flex;
+  gap: 16px;
 }
 
 .form-group label {
   display: block;
   font-size: 13px;
-  font-weight: 500;
+  font-weight: 600;
   margin-bottom: 6px;
   color: var(--text-secondary);
 }
@@ -179,49 +163,43 @@ body[data-perfil="empresa"] .show-estudante { display: none; }
 .form-group select {
   width: 100%;
   padding: 10px 12px;
-  background: rgba(0, 0, 0, 0.2);
-  border: 1px solid var(--border-color);
+  background: #f8fafc;
+  border: 1px solid #cbd5e1;
   border-radius: 6px;
   font-size: 14px;
-  color: white;
+  color: var(--text-primary);
   font-family: inherit;
-  transition: all 0.2s;
 }
 
 .form-group input:focus, 
 .form-group select:focus {
   outline: none;
   border-color: var(--btn-primary);
-  box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.2);
 }
 
 .btn-primary {
-  width: 100%;
   background-color: var(--btn-primary);
   color: white;
   border: none;
-  padding: 12px;
+  padding: 10px 16px;
   border-radius: 6px;
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.3s;
-  margin-top: 8px;
+  transition: 0.2s;
 }
 
 .btn-primary:hover {
   background-color: var(--btn-primary-hover);
-  box-shadow: var(--glow);
-  transform: translateY(-1px);
 }
 
 .btn-text {
-  width: 100%;
   background: none;
   border: none;
-  color: #f87171;
-  margin-top: 12px;
-  font-size: 13px;
+  color: #ef4444;
+  padding: 10px 16px;
+  font-size: 14px;
+  font-weight: 600;
   cursor: pointer;
 }
 
@@ -230,56 +208,47 @@ body[data-perfil="empresa"] .show-estudante { display: none; }
 }
 
 /* ============================================================
-   LISTAGEM E FILTROS (Coluna Direita)
+   LISTAGEM E FILTROS
    ============================================================ */
 .list-card {
-  padding: 0; /* Removendo padding pra listar os cards direto */
+  padding: 20px;
 }
 
 .list-header {
   margin-bottom: 24px;
-  background: rgba(30, 41, 59, 0.4);
-  padding: 20px;
-  border-radius: var(--radius);
-  border: 1px solid var(--border-color);
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border-color);
 }
 
 .list-header h2 {
   font-size: 20px;
   margin-bottom: 16px;
-  color: white;
 }
 
 .filters {
   display: flex;
-  gap: 12px;
+  gap: 8px;
   flex-wrap: wrap;
 }
 
 .filter-btn {
-  background: rgba(0, 0, 0, 0.2);
+  background: #f1f5f9;
   border: 1px solid var(--border-color);
-  padding: 6px 16px;
+  padding: 6px 14px;
   border-radius: 20px;
   font-size: 13px;
   color: var(--text-secondary);
   cursor: pointer;
-  transition: all 0.2s;
-}
-
-.filter-btn:hover {
-  background: rgba(255, 255, 255, 0.05);
 }
 
 .filter-btn.active {
   background: var(--btn-primary);
   color: white;
   border-color: var(--btn-primary);
-  box-shadow: var(--glow);
 }
 
 /* ============================================================
-   GRID DE VAGAS (Cards Individuais)
+   GRID DE VAGAS
    ============================================================ */
 .vagas-grid {
   display: grid;
@@ -288,46 +257,39 @@ body[data-perfil="empresa"] .show-estudante { display: none; }
 }
 
 .vaga-item {
-  background: var(--card-bg);
-  backdrop-filter: blur(8px);
+  background: #fafafa;
   padding: 20px;
   border-radius: var(--radius);
   border: 1px solid var(--border-color);
-  box-shadow: var(--shadow);
   display: flex;
   flex-direction: column;
-  position: relative;
-  transition: transform 0.2s;
-}
-
-.vaga-item:hover {
-  transform: translateY(-2px);
-  border-color: rgba(139, 92, 246, 0.4);
 }
 
 .vaga-title {
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 700;
   margin-bottom: 4px;
-  color: white;
+  color: var(--btn-primary-hover);
 }
 
 .vaga-empresa {
   font-size: 13px;
   color: var(--text-secondary);
   margin-bottom: 16px;
+  font-weight: 600;
 }
 
 .vaga-area {
   display: inline-block;
   font-size: 11px;
   font-weight: 700;
-  padding: 4px 10px;
+  padding: 4px 8px;
   border-radius: 4px;
   text-transform: uppercase;
   margin-bottom: 20px;
   align-self: flex-start;
-  letter-spacing: 0.5px;
+  background: #e2e8f0;
+  color: #475569;
 }
 
 .vaga-footer {
@@ -351,65 +313,128 @@ body[data-perfil="empresa"] .show-estudante { display: none; }
 }
 
 .btn-icon {
-  background: rgba(255,255,255,0.05);
+  background: #fff;
   border: 1px solid var(--border-color);
   border-radius: 4px;
-  padding: 4px 8px;
+  padding: 6px;
   cursor: pointer;
-  font-size: 12px;
-  color: white;
-  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  color: #64748b;
 }
 
 .btn-icon:hover {
-  background: rgba(255,255,255,0.1);
+  background: #f1f5f9;
+  color: var(--text-primary);
 }
 
-/* Botão de Candidatar (Exclusivo do Estudante) */
+/* Botão de Candidatar */
 .btn-candidatar {
-  background: linear-gradient(135deg, #2dd4bf, #0d9488);
+  background: #10b981;
   color: white;
   border: none;
   padding: 6px 14px;
   border-radius: 4px;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.2s;
-  box-shadow: 0 0 10px rgba(45, 212, 191, 0.2);
 }
+.btn-candidatar:hover { background: #059669; }
 
-.btn-candidatar:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 15px rgba(45, 212, 191, 0.4);
-}
-
-/* Texto de contagem de candidatos (Exclusivo da Empresa) */
+/* Link/Botão de ver candidatos da Empresa */
 .candidatos-count {
   font-size: 12px;
-  color: #2dd4bf;
+  color: #3b82f6;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: underline;
+}
+.candidatos-count:hover { color: #2563eb; }
+
+/* ============================================================
+   MODAIS (HTML5 <dialog>)
+   ============================================================ */
+.modal {
+  margin: auto;
+  padding: 0;
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  background: transparent;
+}
+.modal::backdrop {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.modal-box {
+  background: white;
+  padding: 24px;
+  width: 100vw;
+  max-width: 500px;
+  border-radius: 12px;
+}
+
+.modal-grande .modal-box {
+  max-width: 800px;
+}
+
+.modal-desc {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin-bottom: 20px;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+/* Tabela da Empresa */
+.tabela-container {
+  overflow-x: auto;
+}
+
+.tabela-candidatos {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.tabela-candidatos th, .tabela-candidatos td {
+  text-align: left;
+  padding: 12px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.tabela-candidatos th {
+  background: #f8fafc;
   font-weight: 600;
 }
 
-.loading-text {
-  color: var(--text-secondary);
-  font-size: 14px;
+.badge-status {
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 700;
 }
+.status-analise { background: #fef08a; color: #854d0e; }
+.status-aprovado { background: #bbf7d0; color: #166534; }
+.status-rejeitado { background: #fecaca; color: #991b1b; }
 
-/* ============================================================
-   RESPONSIVIDADE (MOBILE FIRST)
-   ============================================================ */
+.btn-status {
+  border: 1px solid var(--border-color);
+  background: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 11px;
+  margin-right: 4px;
+}
+.btn-status.ap { color: #166534; }
+.btn-status.rj { color: #991b1b; }
+
 @media (max-width: 768px) {
-  .container {
-    grid-template-columns: 1fr;
-  }
-  
-  .form-card {
-    position: static;
-  }
-  
-  .header-content {
-    flex-direction: column;
-    text-align: center;
-  }
+  .container { grid-template-columns: 1fr; }
 }

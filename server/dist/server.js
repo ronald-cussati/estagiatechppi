@@ -6,70 +6,59 @@ Object.defineProperty(exports, "__esModule", { value: true });
 // ============================================================
 // IMPORTAÇÕES OBRIGATÓRIAS
 // ============================================================
-// express: Framework base para criar o servidor web
-// Request, Response: Tipos do Express para garantir tipagem do TypeScript
 const express_1 = __importDefault(require("express"));
-// cors: Permite que nosso frontend (na porta 5500 ou live server) converse com o backend
 const cors_1 = __importDefault(require("cors"));
 const path_1 = __importDefault(require("path"));
-// Inicializando o aplicativo Express
 const app = (0, express_1.default)();
 const PORTA = 3000;
 // ============================================================
-// MIDDLEWARES (Configurações do Servidor)
+// MIDDLEWARES
 // ============================================================
-app.use((0, cors_1.default)()); // Libera o acesso da API para outros domínios
-app.use(express_1.default.json()); // Ensina o Express a entender corpo de requisições no formato JSON
-// Configuração para servir o front-end estático da pasta /client
+app.use((0, cors_1.default)());
+app.use(express_1.default.json());
 app.use(express_1.default.static(path_1.default.join(process.cwd(), '../client')));
 // ============================================================
 // BANCO DE DADOS EM MEMÓRIA
 // ============================================================
-// Array que simula o nosso banco de dados temporário.
-// Quando o servidor é reiniciado, ele volta ao estado original.
 const vagas = [
     {
         id: '1718100000001',
         titulo: 'Desenvolvedor Frontend Jr',
-        empresa: 'Stefanini',
+        empresa: 'Bradesco',
         area: 'Frontend',
         dataCriacao: new Date().toISOString()
     }
 ];
+const candidaturas = [];
 // ============================================================
-// ROTAS DA API (ENDPOINTS)
+// ROTAS DE VAGAS (ENDPOINTS)
 // ============================================================
-// Rota 1: GET /vagas
-// Objetivo: Retornar a lista completa de vagas cadastradas.
+// GET /vagas: Retorna a lista completa com a contagem de candidatos
 app.get('/vagas', (req, res) => {
-    // Status 200: OK. Retorna o array convertido em JSON.
-    res.status(200).json(vagas);
+    const vagasComCandidatos = vagas.map(vaga => {
+        const totalCandidatos = candidaturas.filter(c => c.idVaga === vaga.id).length;
+        return { ...vaga, candidatos: totalCandidatos };
+    });
+    res.status(200).json(vagasComCandidatos);
 });
-// Rota 2: POST /vagas
-// Objetivo: Receber uma nova vaga, validar e adicioná-la ao array.
+// POST /vagas: Recebe uma nova vaga
 app.post('/vagas', (req, res) => {
     const { titulo, empresa, area } = req.body;
-    // Validação: Verifica se o frontend mandou todos os dados exigidos
-    if (!titulo || !empresa || !area) {
-        // Status 400: Bad Request (Erro do cliente).
-        res.status(400).json({ erro: "Faltam campos obrigatórios (titulo, empresa ou area)" });
+    if (!titulo || !empresa || !area || titulo.trim() === '' || empresa.trim() === '') {
+        res.status(400).json({ erro: "Faltam campos obrigatórios ou preenchidos apenas com espaços" });
         return;
     }
-    // Montagem do novo objeto respeitando a interface IVaga
     const novaVaga = {
-        id: Date.now().toString(), // Usamos o Timestamp atual como ID único
-        titulo: String(titulo),
-        empresa: String(empresa),
+        id: Date.now().toString(),
+        titulo: titulo.trim(),
+        empresa: empresa.trim(),
         area: String(area),
-        dataCriacao: new Date().toISOString() // Salva a data atual
+        dataCriacao: new Date().toISOString()
     };
-    // Adiciona a nova vaga no "banco de dados"
     vagas.push(novaVaga);
-    // Status 201: Created. Retorna a vaga criada como confirmação.
     res.status(201).json(novaVaga);
 });
-// Rota 3: DELETE /vagas/:id
-// Objetivo: Deletar uma vaga específica através do seu ID.
+// DELETE /vagas/:id: Deletar uma vaga
 app.delete('/vagas/:id', (req, res) => {
     const { id } = req.params;
     const index = vagas.findIndex((v) => v.id === id);
@@ -77,12 +66,10 @@ app.delete('/vagas/:id', (req, res) => {
         res.status(404).json({ erro: 'Vaga não encontrada' });
         return;
     }
-    // Remove 1 elemento do array na posição index
     vagas.splice(index, 1);
     res.status(200).json({ mensagem: 'Vaga apagada com sucesso' });
 });
-// Rota 4: PUT /vagas/:id
-// Objetivo: Atualizar os dados de uma vaga existente.
+// PUT /vagas/:id: Editar uma vaga
 app.put('/vagas/:id', (req, res) => {
     const { id } = req.params;
     const { titulo, empresa, area } = req.body;
@@ -91,21 +78,69 @@ app.put('/vagas/:id', (req, res) => {
         res.status(404).json({ erro: 'Vaga não encontrada' });
         return;
     }
-    if (!titulo || !empresa || !area) {
-        res.status(400).json({ erro: "Faltam campos obrigatórios (titulo, empresa ou area)" });
+    if (!titulo || !empresa || !area || titulo.trim() === '' || empresa.trim() === '') {
+        res.status(400).json({ erro: "Faltam campos obrigatórios ou preenchidos apenas com espaços" });
         return;
     }
-    // Atualiza os dados preservando o ID e a Data de Criação
     vagas[index] = {
         ...vagas[index],
-        titulo: String(titulo),
-        empresa: String(empresa),
+        titulo: titulo.trim(),
+        empresa: empresa.trim(),
         area: String(area)
     };
     res.status(200).json(vagas[index]);
 });
 // ============================================================
-// INICIALIZAÇÃO DO SERVIDOR
+// ROTAS DE CANDIDATURAS
+// ============================================================
+// POST /candidaturas: Recebe uma nova candidatura rica
+app.post('/candidaturas', (req, res) => {
+    const { idVaga, nomeCandidato, idade, curso, periodo, email, github, linkedin } = req.body;
+    // Validação dos campos obrigatórios
+    if (!idVaga || !nomeCandidato || !idade || !curso || !periodo || !email || !github) {
+        res.status(400).json({ erro: 'Apenas Linkedin é opcional, preencha os demais!' });
+        return;
+    }
+    const novaCandidatura = {
+        id: Date.now().toString(),
+        idVaga: String(idVaga),
+        nomeCandidato: nomeCandidato.trim(),
+        idade: String(idade).trim(),
+        curso: curso.trim(),
+        periodo: periodo.trim(),
+        email: email.trim(),
+        github: github.trim(),
+        linkedin: linkedin ? linkedin.trim() : '',
+        status: 'Em análise',
+        dataCandidatura: new Date().toISOString()
+    };
+    candidaturas.push(novaCandidatura);
+    res.status(201).json(novaCandidatura);
+});
+// GET /candidaturas/:idVaga: Lista quem se candidatou na vaga específica
+app.get('/candidaturas/:idVaga', (req, res) => {
+    const { idVaga } = req.params;
+    const inscritos = candidaturas.filter(c => c.idVaga === idVaga);
+    res.status(200).json(inscritos);
+});
+// PUT /candidaturas/:id/status: Atualiza status do candidato (Moderação da Empresa)
+app.put('/candidaturas/:id/status', (req, res) => {
+    const { id } = req.params;
+    const { status } = req.body;
+    if (status !== 'Em análise' && status !== 'Aprovado' && status !== 'Rejeitado') {
+        res.status(400).json({ erro: "Status inválido" });
+        return;
+    }
+    const index = candidaturas.findIndex(c => c.id === id);
+    if (index === -1) {
+        res.status(404).json({ erro: "Candidatura não encontrada" });
+        return;
+    }
+    candidaturas[index].status = status;
+    res.status(200).json(candidaturas[index]);
+});
+// ============================================================
+// INICIALIZAÇÃO
 // ============================================================
 app.listen(PORTA, () => {
     console.log(`Servidor rodando na porta ${PORTA}...`);

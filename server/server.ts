@@ -21,8 +21,15 @@ export interface IVaga {
 
 export interface ICandidatura {
   id: string;
-  idVaga: string; // Relacionamento com a Vaga
+  idVaga: string; 
   nomeCandidato: string;
+  idade: string;
+  curso: string;
+  periodo: string;
+  email: string;
+  github: string;
+  linkedin: string; // opcional, mas no backend trataremos como string (pode vir vazia)
+  status: 'Em análise' | 'Aprovado' | 'Rejeitado';
   dataCandidatura: string;
 }
 
@@ -40,13 +47,12 @@ const vagas: IVaga[] = [
   {
     id: '1718100000001',
     titulo: 'Desenvolvedor Frontend Jr',
-    empresa: 'Stefanini',
+    empresa: 'Bradesco',
     area: 'Frontend',
     dataCriacao: new Date().toISOString()
   }
 ];
 
-// Simulando a tabela de Candidaturas do Banco
 const candidaturas: ICandidatura[] = [];
 
 // ============================================================
@@ -55,7 +61,6 @@ const candidaturas: ICandidatura[] = [];
 
 // GET /vagas: Retorna a lista completa com a contagem de candidatos
 app.get('/vagas', (req: Request, res: Response) => {
-  // Vamos enviar as vagas com uma contagem de quantos se candidataram (opcional mas agrega valor)
   const vagasComCandidatos = vagas.map(vaga => {
     const totalCandidatos = candidaturas.filter(c => c.idVaga === vaga.id).length;
     return { ...vaga, candidatos: totalCandidatos };
@@ -68,7 +73,6 @@ app.get('/vagas', (req: Request, res: Response) => {
 app.post('/vagas', (req: Request, res: Response) => {
   const { titulo, empresa, area } = req.body;
 
-  // Validação mais rigorosa usando .trim() para evitar vagas em branco (Ex: "   ")
   if (!titulo || !empresa || !area || titulo.trim() === '' || empresa.trim() === '') {
     res.status(400).json({ erro: "Faltam campos obrigatórios ou preenchidos apenas com espaços" });
     return;
@@ -112,7 +116,6 @@ app.put('/vagas/:id', (req: Request, res: Response) => {
     return;
   }
 
-  // Mesma correção do bug de strings vazias
   if (!titulo || !empresa || !area || titulo.trim() === '' || empresa.trim() === '') {
     res.status(400).json({ erro: "Faltam campos obrigatórios ou preenchidos apenas com espaços" });
     return;
@@ -128,17 +131,17 @@ app.put('/vagas/:id', (req: Request, res: Response) => {
   res.status(200).json(vagas[index]);
 });
 
-
 // ============================================================
 // ROTAS DE CANDIDATURAS
 // ============================================================
 
-// POST /candidaturas: Recebe uma nova candidatura para uma vaga
+// POST /candidaturas: Recebe uma nova candidatura rica
 app.post('/candidaturas', (req: Request, res: Response) => {
-  const { idVaga, nomeCandidato } = req.body;
+  const { idVaga, nomeCandidato, idade, curso, periodo, email, github, linkedin } = req.body;
 
-  if (!idVaga || !nomeCandidato || nomeCandidato.trim() === '') {
-    res.status(400).json({ erro: 'Id da Vaga e Nome do Candidato são obrigatórios' });
+  // Validação dos campos obrigatórios
+  if (!idVaga || !nomeCandidato || !idade || !curso || !periodo || !email || !github) {
+    res.status(400).json({ erro: 'Apenas Linkedin é opcional, preencha os demais!' });
     return;
   }
 
@@ -146,6 +149,13 @@ app.post('/candidaturas', (req: Request, res: Response) => {
     id: Date.now().toString(),
     idVaga: String(idVaga),
     nomeCandidato: nomeCandidato.trim(),
+    idade: String(idade).trim(),
+    curso: curso.trim(),
+    periodo: periodo.trim(),
+    email: email.trim(),
+    github: github.trim(),
+    linkedin: linkedin ? linkedin.trim() : '',
+    status: 'Em análise',
     dataCandidatura: new Date().toISOString()
   };
 
@@ -158,6 +168,26 @@ app.get('/candidaturas/:idVaga', (req: Request, res: Response) => {
   const { idVaga } = req.params;
   const inscritos = candidaturas.filter(c => c.idVaga === idVaga);
   res.status(200).json(inscritos);
+});
+
+// PUT /candidaturas/:id/status: Atualiza status do candidato (Moderação da Empresa)
+app.put('/candidaturas/:id/status', (req: Request, res: Response) => {
+  const { id } = req.params;
+  const { status } = req.body;
+
+  if (status !== 'Em análise' && status !== 'Aprovado' && status !== 'Rejeitado') {
+    res.status(400).json({ erro: "Status inválido" });
+    return;
+  }
+
+  const index = candidaturas.findIndex(c => c.id === id);
+  if (index === -1) {
+    res.status(404).json({ erro: "Candidatura não encontrada" });
+    return;
+  }
+
+  candidaturas[index].status = status;
+  res.status(200).json(candidaturas[index]);
 });
 
 // ============================================================

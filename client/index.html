@@ -11,29 +11,32 @@
 </head>
 <body data-perfil="estudante">
   
-  <!-- Cabeçalho com o Seletor de Perfil -->
-  <header class="header glass">
+  <header class="header">
     <div class="header-content">
       <div class="logo-area">
         <h1>EstagiaTech</h1>
         <p>A ponte entre Talentos e Empresas</p>
       </div>
       
-      <!-- Seletor que muda a visualização da tela inteira -->
       <div class="role-selector">
         <span>Acessando como:</span>
-        <button id="btn-role-estudante" class="role-btn active">👨‍💻 Estudante</button>
-        <button id="btn-role-empresa" class="role-btn">🏢 Empresa</button>
+        <button id="btn-role-estudante" class="role-btn active">
+          <!-- Ícone Estudante -->
+          <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222"></path></svg>
+          Estudante
+        </button>
+        <button id="btn-role-empresa" class="role-btn">
+          <!-- Ícone Empresa -->
+          <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
+          Empresa
+        </button>
       </div>
     </div>
   </header>
 
-  <!-- Layout Principal -->
   <main class="container">
-    
-    <!-- Coluna Esquerda: Formulário de Cadastro (SÓ APARECE PARA EMPRESA) -->
     <aside class="sidebar only-empresa">
-      <div class="card form-card glass">
+      <div class="card form-card">
         <h2 id="form-title">Publicar Nova Vaga</h2>
         
         <form id="form-vaga">
@@ -41,13 +44,12 @@
           
           <div class="form-group">
             <label for="titulo">Título da Vaga</label>
-            <!-- o atributo required é ignorado apenas por strings vazias, mas validamos isso no ts agora -->
             <input type="text" id="titulo" placeholder="Ex: Desenvolvedor Frontend Jr" required>
           </div>
           
           <div class="form-group">
             <label for="empresa">Empresa</label>
-            <input type="text" id="empresa" placeholder="Ex: Stefanini" required>
+            <input type="text" id="empresa" placeholder="Ex: Bradesco" required>
           </div>
           
           <div class="form-group">
@@ -67,13 +69,11 @@
       </div>
     </aside>
 
-    <!-- Coluna Direita: Listagem e Filtros -->
     <section class="content">
       <div class="card list-card">
         <div class="list-header">
           <h2 id="titulo-listagem">Vagas em Destaque</h2>
           
-          <!-- Filtros de Área -->
           <div class="filters" id="filters-container">
             <button class="filter-btn active" data-filter="Todos">Todos</button>
             <button class="filter-btn" data-filter="Frontend">Frontend</button>
@@ -83,15 +83,104 @@
           </div>
         </div>
 
-        <!-- Grid de Vagas -->
         <div class="vagas-grid" id="lista-vagas">
-          <!-- Os cards serão injetados aqui via TypeScript -->
           <p class="loading-text">Carregando vagas...</p>
         </div>
       </div>
     </section>
-
   </main>
+
+  <!-- MODAL DE CANDIDATURA (Estudante) -->
+  <dialog id="modal-candidatura" class="modal">
+    <div class="modal-box">
+      <h2>Formulário de Candidatura</h2>
+      <p class="modal-desc">Preencha seus dados para enviar à empresa.</p>
+      
+      <form id="form-candidatura">
+        <input type="hidden" id="cand-vaga-id" value="">
+        
+        <div class="form-group">
+          <label>Nome Completo *</label>
+          <input type="text" id="cand-nome" required>
+        </div>
+        
+        <div class="form-group-row">
+          <div class="form-group">
+            <label>Idade *</label>
+            <input type="number" id="cand-idade" min="14" max="100" required>
+          </div>
+          <div class="form-group">
+            <label>Período atual *</label>
+            <select id="cand-periodo" required>
+              <option value="">Selecione...</option>
+              <option value="1º Período">1º Período</option>
+              <option value="2º Período">2º Período</option>
+              <option value="3º Período">3º Período</option>
+              <option value="4º Período">4º Período</option>
+              <option value="5º Período">5º Período</option>
+              <option value="6º Período">6º Período</option>
+              <option value="7º Período">7º Período</option>
+              <option value="8º Período">8º Período</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Nome do Curso *</label>
+          <input type="text" id="cand-curso" required>
+        </div>
+
+        <div class="form-group">
+          <label>E-mail *</label>
+          <input type="email" id="cand-email" required>
+        </div>
+
+        <div class="form-group">
+          <label>GitHub (Link) *</label>
+          <input type="url" id="cand-github" placeholder="https://github.com/..." required>
+        </div>
+
+        <div class="form-group">
+          <label>LinkedIn (Opcional)</label>
+          <input type="url" id="cand-linkedin" placeholder="https://linkedin.com/in/...">
+        </div>
+
+        <div class="modal-actions">
+          <button type="button" class="btn-text" id="btn-fechar-candidatura">Cancelar</button>
+          <button type="submit" class="btn-primary">Enviar Candidatura</button>
+        </div>
+      </form>
+    </div>
+  </dialog>
+
+  <!-- MODAL DE MODERAÇÃO (Empresa) -->
+  <dialog id="modal-empresa" class="modal modal-grande">
+    <div class="modal-box">
+      <h2>Painel de Candidatos</h2>
+      <p class="modal-desc">Analise e aprove ou rejeite os currículos recebidos.</p>
+      
+      <div class="tabela-container">
+        <table class="tabela-candidatos">
+          <thead>
+            <tr>
+              <th>Nome</th>
+              <th>Curso / Período</th>
+              <th>Links</th>
+              <th>Status</th>
+              <th>Ação</th>
+            </tr>
+          </thead>
+          <tbody id="lista-inscritos">
+            <!-- Linhas geradas no app.ts -->
+          </tbody>
+        </table>
+      </div>
+
+      <div class="modal-actions">
+        <button type="button" class="btn-text" id="btn-fechar-empresa">Fechar Painel</button>
+      </div>
+    </div>
+  </dialog>
 
   <script src="dist/app.js"></script>
 </body>
