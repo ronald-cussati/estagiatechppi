@@ -17,6 +17,10 @@ const port = 3000;
 app.use((0, cors_1.default)());
 // Permite que nosso Express entenda quando o React/Front envia objetos no formato JSON.
 app.use(express_1.default.json());
+const path_1 = __importDefault(require("path"));
+// Serve a pasta 'client' (nosso Front-end) na raiz do servidor. 
+// Assim, ao entrar no localhost:3000, o Node entrega o index.html em vez de dar "Cannot GET /"
+app.use(express_1.default.static(path_1.default.join(__dirname, '../../client')));
 let vagas = [];
 let candidaturas = [];
 // =========================================================================
