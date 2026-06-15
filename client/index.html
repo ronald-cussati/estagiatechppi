@@ -213,6 +213,44 @@
     </div>
   </dialog>
 
+  <!-- RODAPÉ DO SISTEMA -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-info">
+        <h3>EstagiaTech</h3>
+        <p>Faculdade Multivix — Sistemas de Informação</p>
+        <p class="prof-name">Disciplina: Programação para a Internet (PPI)</p>
+        <p class="prof-name">Professor: Jean Cheiran</p>
+      </div>
+      <div class="footer-links">
+        <button id="btn-abrir-integrantes" class="btn-footer-link">Ver Integrantes do Grupo</button>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 EstagiaTech. Desenvolvido para fins acadêmicos.</p>
+    </div>
+  </footer>
+
+  <!-- MODAL DE INTEGRANTES (Pop-up) -->
+  <dialog id="modal-integrantes" class="modal popup-modal">
+    <div class="modal-box popup-box">
+      <div class="icon-warning">
+        <svg width="48" height="48" fill="none" stroke="#2563eb" viewBox="0 0 24 24" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 14l9-5-9-5-9 5 9 5z"></path>
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"></path>
+        </svg>
+      </div>
+      <h3>Integrantes do Grupo</h3>
+      <div class="integrantes-lista" style="margin: 20px 0; text-align: center; font-size: 14px; color: var(--text-primary);">
+        <p style="margin-bottom: 8px; font-weight: 600;">Ronald Cussati Cesar da Fonseca</p>
+        <p style="font-weight: 600;">Leonarda Candal de Carvalho</p>
+      </div>
+      <div class="modal-actions centralize-btn">
+        <button type="button" class="btn-primary" id="btn-fechar-integrantes">Fechar</button>
+      </div>
+    </div>
+  </dialog>
+
   <script src="dist/app.js"></script>
 </body>
 </html>

@@ -1,12 +1,3 @@
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 // ============================================================
 // VARIÁVEIS GLOBAIS (ESTADO DO SITE)
 // ============================================================
@@ -41,6 +32,10 @@ const btnFecharCandidatura = document.getElementById('btn-fechar-candidatura');
 const modalEmpresa = document.getElementById('modal-empresa');
 const listaInscritos = document.getElementById('lista-inscritos');
 const btnFecharEmpresa = document.getElementById('btn-fechar-empresa');
+// Elementos do Modal de Integrantes
+const modalIntegrantes = document.getElementById('modal-integrantes');
+const btnAbrirIntegrantes = document.getElementById('btn-abrir-integrantes');
+const btnFecharIntegrantes = document.getElementById('btn-fechar-integrantes');
 // Elementos dos Modais de Alerta Customizados
 const customAlert = document.getElementById('custom-alert');
 const alertTitle = document.getElementById('alert-title');
@@ -151,21 +146,19 @@ function resetarFormulario() {
 // COMUNICAÇÃO COM O SERVIDOR (O CORAÇÃO DO SISTEMA)
 // ============================================================
 // Pede (GET) a lista de vagas para a API no localhost:3000
-function fetchVagas() {
-    return __awaiter(this, void 0, void 0, function* () {
-        try {
-            const resposta = yield fetch('http://localhost:3000/vagas');
-            vagasGlobal = yield resposta.json(); // Pega a resposta e transforma em objeto do JavaScript
-            renderVagas(); // Renderiza os "cards" na tela
-        }
-        catch (erro) {
-            console.error("Erro de rede. O Node.js tá rodando?", erro);
-            listaVagas.innerHTML = '<p class="loading-text">Erro ao conectar com o servidor. O back-end foi iniciado?</p>';
-        }
-    });
+async function fetchVagas() {
+    try {
+        const resposta = await fetch('http://localhost:3000/vagas');
+        vagasGlobal = await resposta.json(); // Pega a resposta e transforma em objeto do JavaScript
+        renderVagas(); // Renderiza os "cards" na tela
+    }
+    catch (erro) {
+        console.error("Erro de rede. O Node.js tá rodando?", erro);
+        listaVagas.innerHTML = '<p class="loading-text">Erro ao conectar com o servidor. O back-end foi iniciado?</p>';
+    }
 }
 // Quando a empresa clica em "Publicar Vaga"
-formVaga.addEventListener('submit', (evento) => __awaiter(this, void 0, void 0, function* () {
+formVaga.addEventListener('submit', async (evento) => {
     evento.preventDefault(); // Evita a página recarregar sozinha (Comportamento padrão do form)
     const titulo = inputTitulo.value.trim(); // .trim() remove espaços em branco inúteis "  vaga " -> "vaga"
     const empresa = inputEmpresa.value.trim();
@@ -181,21 +174,21 @@ formVaga.addEventListener('submit', (evento) => __awaiter(this, void 0, void 0, 
     try {
         if (idEdicao) {
             // Se houver um idEdicao, significa que é o Modo Edição (PUT)
-            yield fetch(`http://localhost:3000/vagas/${idEdicao}`, {
+            await fetch(`http://localhost:3000/vagas/${idEdicao}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(dados)
             });
-            yield mostrarAlerta('Vaga editada com sucesso!', 'sucesso');
+            await mostrarAlerta('Vaga editada com sucesso!', 'sucesso');
         }
         else {
             // Caso contrário, é criar uma nova vaga (POST)
-            yield fetch('http://localhost:3000/vagas', {
+            await fetch('http://localhost:3000/vagas', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(dados)
             });
-            yield mostrarAlerta('Nova vaga publicada com sucesso!', 'sucesso');
+            await mostrarAlerta('Nova vaga publicada com sucesso!', 'sucesso');
         }
         resetarFormulario();
         fetchVagas(); // Recarrega do servidor a lista nova
@@ -203,23 +196,23 @@ formVaga.addEventListener('submit', (evento) => __awaiter(this, void 0, void 0, 
     catch (erro) {
         mostrarAlerta('Erro de conexão ao salvar a vaga.', 'erro');
     }
-}));
+});
 // A empresa quer deletar uma vaga.
 // (Usamos "window as any" para a função ser lida no "onclick" no HTML).
-window.deletarVaga = (id) => __awaiter(this, void 0, void 0, function* () {
+window.deletarVaga = async (id) => {
     // Chamamos nosso modal customizado e aguardamos o clique
-    const confirmacao = yield mostrarConfirm('Tem certeza que deseja excluir esta vaga? Os dados da vaga e candidatos serão apagados.');
+    const confirmacao = await mostrarConfirm('Tem certeza que deseja excluir esta vaga? Os dados da vaga e candidatos serão apagados.');
     if (!confirmacao)
         return; // Cai fora se clikou "Cancelar"
     try {
-        yield fetch(`http://localhost:3000/vagas/${id}`, { method: 'DELETE' });
-        yield mostrarAlerta('Vaga excluída permanentemente.', 'sucesso');
+        await fetch(`http://localhost:3000/vagas/${id}`, { method: 'DELETE' });
+        await mostrarAlerta('Vaga excluída permanentemente.', 'sucesso');
         fetchVagas();
     }
     catch (erro) {
         mostrarAlerta('Falha ao apagar a vaga no servidor.', 'erro');
     }
-});
+};
 window.prepararEdicao = (id) => {
     // Procura no nosso vetor de vagas qual é a que queremos editar
     const vaga = vagasGlobal.find(v => v.id === id);
@@ -249,7 +242,7 @@ btnFecharCandidatura.addEventListener('click', () => {
     modalCandidatura.close();
 });
 // Ao clicar em Enviar Candidatura
-formCandidatura.addEventListener('submit', (e) => __awaiter(this, void 0, void 0, function* () {
+formCandidatura.addEventListener('submit', async (e) => {
     e.preventDefault();
     // Monta a maleta (payload) de dados do jovem
     const payload = {
@@ -263,14 +256,14 @@ formCandidatura.addEventListener('submit', (e) => __awaiter(this, void 0, void 0
         linkedin: document.getElementById('cand-linkedin').value,
     };
     try {
-        const res = yield fetch('http://localhost:3000/candidaturas', {
+        const res = await fetch('http://localhost:3000/candidaturas', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(payload)
         });
         if (res.ok) {
             modalCandidatura.close();
-            yield mostrarAlerta("Sua candidatura voou para a empresa! Boa sorte na entrevista.", "sucesso");
+            await mostrarAlerta("Sua candidatura voou para a empresa! Boa sorte na entrevista.", "sucesso");
             fetchVagas(); // Atualiza a tela pra dar um 'refresh' no contador de inscritos pra empresa
         }
         else {
@@ -280,18 +273,18 @@ formCandidatura.addEventListener('submit', (e) => __awaiter(this, void 0, void 0
     catch (erro) {
         mostrarAlerta("Erro de rede. Node.js caiu?", "erro");
     }
-}));
+});
 // ============================================================
 // PAINEL DE MODERAÇÃO (EMPRESA AVALIANDO ALUNOS)
 // ============================================================
-window.abrirModalEmpresa = (idVaga) => __awaiter(this, void 0, void 0, function* () {
+window.abrirModalEmpresa = async (idVaga) => {
     // Começa escrevendo "Carregando" na tabela
     listaInscritos.innerHTML = '<tr><td colspan="5">Carregando candidatos pelo Back-end...</td></tr>';
     modalEmpresa.showModal();
     try {
         // Buscar todos os estudantes atrelados àquela vaga específica
-        const resposta = yield fetch(`http://localhost:3000/candidaturas/${idVaga}`);
-        const candidatos = yield resposta.json();
+        const resposta = await fetch(`http://localhost:3000/candidaturas/${idVaga}`);
+        const candidatos = await resposta.json();
         listaInscritos.innerHTML = '';
         // Se a lista (array) tiver vazia (length = 0)
         if (candidatos.length === 0) {
@@ -331,14 +324,14 @@ window.abrirModalEmpresa = (idVaga) => __awaiter(this, void 0, void 0, function*
     catch (erro) {
         listaInscritos.innerHTML = '<tr><td colspan="5">Falhou ao ler os dados do banco/array.</td></tr>';
     }
-});
-window.mudarStatus = (idCandidatura, novoStatus, idVaga) => __awaiter(this, void 0, void 0, function* () {
-    const confirmacao = yield mostrarConfirm(`Marcar como ${novoStatus}? O candidato receberia esse e-mail.`);
+};
+window.mudarStatus = async (idCandidatura, novoStatus, idVaga) => {
+    const confirmacao = await mostrarConfirm(`Marcar como ${novoStatus}? O candidato receberia esse e-mail.`);
     if (!confirmacao)
         return;
     try {
         // PUT é usado na REST API para Atualizações (Updates)
-        yield fetch(`http://localhost:3000/candidaturas/${idCandidatura}/status`, {
+        await fetch(`http://localhost:3000/candidaturas/${idCandidatura}/status`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ status: novoStatus })
@@ -349,9 +342,16 @@ window.mudarStatus = (idCandidatura, novoStatus, idVaga) => __awaiter(this, void
     catch (erro) {
         mostrarAlerta("Erro ao gravar o novo status.", "erro");
     }
-});
+};
 btnFecharEmpresa.addEventListener('click', () => {
     modalEmpresa.close();
+});
+// Controle de Abertura/Fechamento do Modal de Integrantes
+btnAbrirIntegrantes.addEventListener('click', () => {
+    modalIntegrantes.showModal();
+});
+btnFecharIntegrantes.addEventListener('click', () => {
+    modalIntegrantes.close();
 });
 // ============================================================
 // PINTOR DA TELA E FILTRAGEM DE CATEGORIAS

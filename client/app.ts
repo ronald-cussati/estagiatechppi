@@ -66,6 +66,11 @@ const modalEmpresa = document.getElementById('modal-empresa') as HTMLDialogEleme
 const listaInscritos = document.getElementById('lista-inscritos') as HTMLTableSectionElement;
 const btnFecharEmpresa = document.getElementById('btn-fechar-empresa') as HTMLButtonElement;
 
+// Elementos do Modal de Integrantes
+const modalIntegrantes = document.getElementById('modal-integrantes') as HTMLDialogElement;
+const btnAbrirIntegrantes = document.getElementById('btn-abrir-integrantes') as HTMLButtonElement;
+const btnFecharIntegrantes = document.getElementById('btn-fechar-integrantes') as HTMLButtonElement;
+
 // Elementos dos Modais de Alerta Customizados
 const customAlert = document.getElementById('custom-alert') as HTMLDialogElement;
 const alertTitle = document.getElementById('alert-title') as HTMLHeadingElement;
@@ -404,6 +409,15 @@ formCandidatura.addEventListener('submit', async (e) => {
 
 btnFecharEmpresa.addEventListener('click', () => {
   modalEmpresa.close();
+});
+
+// Controle de Abertura/Fechamento do Modal de Integrantes
+btnAbrirIntegrantes.addEventListener('click', () => {
+  modalIntegrantes.showModal();
+});
+
+btnFecharIntegrantes.addEventListener('click', () => {
+  modalIntegrantes.close();
 });
 
 // ============================================================
