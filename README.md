@@ -79,7 +79,6 @@ O projeto foi inteiramente arquitetado e concebido pelos alunos abaixo para fins
 - **Ronald Cussati Cesar da Fonseca**
 - **Leonarda Candal de Carvalho**
 
-**Instituição:** Faculdade Multivix
-**Curso:** Sistemas de Informação
-**Disciplina:** Programação para a Internet (PPI)  
-**Professor Responsável:** Edgard da Cunha Pontes
+**Instituição:** Faculdade Multivix | **Curso:** Sistemas de Informação
+
+**Professor Responsável:** Edgard da Cunha Pontes | **Disciplina:** Programação para a Internet (PPI)
