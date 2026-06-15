@@ -85,6 +85,7 @@ button, .card, .vaga-item {
 }
 
 .header-content {
+  width: 100%;
   max-width: 1600px;
   margin: 0 auto;
   padding: 0 16px;
@@ -182,6 +183,7 @@ button, .card, .vaga-item {
    LAYOUT PRINCIPAL (MOBILE FIRST)
    ============================================================ */
 .container {
+  width: 100%;
   max-width: 1600px;
   margin: 0 auto;
   padding: 0 16px 32px;
@@ -685,7 +687,7 @@ body[data-perfil="estudante"] .container {
   }
   
   .vagas-grid {
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
     gap: 20px;
   }
   
@@ -722,6 +724,7 @@ body[data-perfil="estudante"] .container {
 }
 
 .footer-content {
+  width: 100%;
   max-width: 1600px;
   margin: 0 auto;
   padding: 0 16px;
@@ -768,6 +771,7 @@ body[data-perfil="estudante"] .container {
 }
 
 .footer-bottom {
+  width: 100%;
   max-width: 1600px;
   margin: 20px auto 0;
   padding: 16px 16px 0;
@@ -802,7 +806,7 @@ body[data-perfil="estudante"] .container {
   }
 
   .vagas-grid {
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
   }
 
   .form-card {
