@@ -15,7 +15,7 @@
 
 ## Links Rápidos
 
-- **Ambiente de Produção:** [estagiatechppi.vercel.app](https://estagiatechppi.vercel.app)
+- **Ambiente de Produção:** [estagiatech.vercel.app](https://estagiatech.vercel.app)
 - **Documentação de Uso:** Consulte as seções abaixo para rodar localmente.
 
 ---
