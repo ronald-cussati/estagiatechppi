@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EstagiaTech - Vagas de Estágio</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body data-perfil="estudante">
+  
+  <!-- Cabeçalho com o Seletor de Perfil -->
+  <header class="header glass">
+    <div class="header-content">
+      <div class="logo-area">
+        <h1>EstagiaTech</h1>
+        <p>A ponte entre Talentos e Empresas</p>
+      </div>
+      
+      <!-- Seletor que muda a visualização da tela inteira -->
+      <div class="role-selector">
+        <span>Acessando como:</span>
+        <button id="btn-role-estudante" class="role-btn active">👨‍💻 Estudante</button>
+        <button id="btn-role-empresa" class="role-btn">🏢 Empresa</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Layout Principal -->
+  <main class="container">
+    
+    <!-- Coluna Esquerda: Formulário de Cadastro (SÓ APARECE PARA EMPRESA) -->
+    <aside class="sidebar only-empresa">
+      <div class="card form-card glass">
+        <h2 id="form-title">Publicar Nova Vaga</h2>
+        
+        <form id="form-vaga">
+          <input type="hidden" id="vaga-id" value="">
+          
+          <div class="form-group">
+            <label for="titulo">Título da Vaga</label>
+            <!-- o atributo required é ignorado apenas por strings vazias, mas validamos isso no ts agora -->
+            <input type="text" id="titulo" placeholder="Ex: Desenvolvedor Frontend Jr" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="empresa">Empresa</label>
+            <input type="text" id="empresa" placeholder="Ex: Stefanini" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="area">Área de Atuação</label>
+            <select id="area" required>
+              <option value="" disabled selected>Selecione uma área...</option>
+              <option value="Frontend">Frontend</option>
+              <option value="Backend">Backend</option>
+              <option value="Data">Data</option>
+              <option value="Mobile">Mobile</option>
+            </select>
+          </div>
+          
+          <button type="submit" id="btn-submit" class="btn-primary">Publicar Vaga</button>
+          <button type="button" id="btn-cancel" class="btn-text hidden">Cancelar Edição</button>
+        </form>
+      </div>
+    </aside>
+
+    <!-- Coluna Direita: Listagem e Filtros -->
+    <section class="content">
+      <div class="card list-card">
+        <div class="list-header">
+          <h2 id="titulo-listagem">Vagas em Destaque</h2>
+          
+          <!-- Filtros de Área -->
+          <div class="filters" id="filters-container">
+            <button class="filter-btn active" data-filter="Todos">Todos</button>
+            <button class="filter-btn" data-filter="Frontend">Frontend</button>
+            <button class="filter-btn" data-filter="Backend">Backend</button>
+            <button class="filter-btn" data-filter="Data">Data</button>
+            <button class="filter-btn" data-filter="Mobile">Mobile</button>
+          </div>
+        </div>
+
+        <!-- Grid de Vagas -->
+        <div class="vagas-grid" id="lista-vagas">
+          <!-- Os cards serão injetados aqui via TypeScript -->
+          <p class="loading-text">Carregando vagas...</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="dist/app.js"></script>
+</body>
+</html>
