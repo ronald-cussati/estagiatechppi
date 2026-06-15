@@ -1,33 +1,35 @@
 /* ============================================================
-   VARIÁVEIS - TEMA AMARELO MANTEIGA PREMIUM (SHIMMER)
+   VARIÁVEIS - TEMA CORPORATIVO/ACADÊMICO
    ============================================================ */
 :root {
-  /* Amarelo Manteiga / Creme suave pro fundo do site */
-  --bg-color: #fffdf2;
-  --bg-gradient: linear-gradient(135deg, #fffcf0 0%, #fef3c7 100%);
+  /* Fundo cinza super claro, cansa menos a vista e passa seriedade */
+  --bg-color: #f8fafc;
+  --bg-gradient: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
   
-  /* Header em um amarelo rico e vibrante com leve gradiente */
-  --header-bg: linear-gradient(90deg, #f59e0b 0%, #fbbf24 100%);
+  /* Header em um azul escuro/chumbo bem elegante */
+  --header-bg: linear-gradient(90deg, #1e293b 0%, #334155 100%);
   --header-text: #ffffff;
   
+  /* Textos gerais */
   --text-primary: #334155;
   --text-secondary: #64748b;
-  --border-color: #fde68a;
+  --border-color: #e2e8f0;
   --card-bg: #ffffff;
   
-  --btn-primary: #f59e0b;
-  --btn-primary-hover: #d97706;
+  /* Azul padrão para botões (estilo LinkedIn) */
+  --btn-primary: #2563eb;
+  --btn-primary-hover: #1d4ed8;
   
-  /* Cores Premium para os Alertas */
-  --color-success: #10b981; /* Verde Premium */
-  --color-danger: #ef4444;  /* Vermelho Premium */
+  /* Cores para os Alertas (Sucesso e Erro) */
+  --color-success: #10b981; 
+  --color-danger: #ef4444;  
   
-  --radius: 12px;
-  --shadow: 0 10px 15px -3px rgba(245, 158, 11, 0.1), 0 4px 6px -2px rgba(245, 158, 11, 0.05);
+  --radius: 8px; /* Bordas um pouco mais quadradas, mais "sério" */
+  --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
 }
 
 /* ============================================================
-   EFEITO SHIMMER (ANIMAÇÃO)
+   EFEITO SHIMMER (ANIMAÇÃO DA BARRA)
    ============================================================ */
 @keyframes shimmer {
   0% { background-position: -200% 0; }
@@ -52,7 +54,7 @@ body {
   min-height: 100vh;
 }
 
-/* Aplicando transição e hover universal aos botões e cards */
+/* Apenas os botões e os cards pulam de leve ao passar o mouse */
 button, .card, .vaga-item {
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -65,8 +67,7 @@ button, .card, .vaga-item {
   color: var(--header-text);
   padding: 20px 0;
   margin-bottom: 32px;
-  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.2);
-  /* Efeito de brilho na barra */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   position: relative;
   overflow: hidden;
 }
@@ -75,10 +76,10 @@ button, .card, .vaga-item {
   content: "";
   position: absolute;
   top: 0; left: 0; width: 100%; height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
   background-size: 200% 100%;
-  animation: shimmer 5s infinite linear;
-  pointer-events: none;
+  animation: shimmer 6s infinite linear;
+  pointer-events: none; /* Para não bugar o clique nos botões */
 }
 
 .header-content {
@@ -95,24 +96,24 @@ button, .card, .vaga-item {
 }
 
 .logo-area h1 { font-size: 24px; font-weight: 700; color: #fff; }
-.logo-area p { font-size: 14px; color: #fffaf0; }
+.logo-area p { font-size: 14px; color: #cbd5e1; }
 
 .role-selector {
   display: flex;
   align-items: center;
   gap: 8px;
-  background: rgba(255,255,255,0.25);
+  background: rgba(0,0,0,0.25); /* Fundo sutil pro seletor */
   padding: 6px 12px;
   border-radius: 30px;
   backdrop-filter: blur(4px);
 }
 
-.role-selector span { font-size: 13px; font-weight: 500; margin-right: 4px; }
+.role-selector span { font-size: 13px; font-weight: 500; margin-right: 4px; color: #f8fafc; }
 
 .role-btn {
   background: transparent;
   border: none;
-  color: #fff;
+  color: #94a3b8;
   padding: 8px 16px;
   border-radius: 20px;
   font-size: 13px;
@@ -123,10 +124,10 @@ button, .card, .vaga-item {
   gap: 6px;
 }
 
-.role-btn:hover { background: rgba(255, 255, 255, 0.1); }
+.role-btn:hover { color: #f1f5f9; background: rgba(255, 255, 255, 0.05); }
 .role-btn.active {
   background: #fff;
-  color: #d97706;
+  color: #1e293b;
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
@@ -143,6 +144,7 @@ button, .card, .vaga-item {
   align-items: start;
 }
 
+/* Quando logado como estudante, esconde o form de criar vagas */
 body[data-perfil="estudante"] .only-empresa { display: none; }
 body[data-perfil="estudante"] .container {
   grid-template-columns: 1fr;
@@ -159,7 +161,7 @@ body[data-perfil="estudante"] .container {
   box-shadow: var(--shadow);
 }
 .card:hover {
-  box-shadow: 0 15px 20px -5px rgba(245, 158, 11, 0.15);
+  box-shadow: 0 10px 15px -5px rgba(0, 0, 0, 0.08);
 }
 
 .form-card { padding: 24px; position: sticky; top: 20px; }
@@ -175,8 +177,8 @@ body[data-perfil="estudante"] .container {
 .form-group input, .form-group select {
   width: 100%;
   padding: 10px 12px;
-  background: #fdfbf7;
-  border: 1px solid #fde68a;
+  background: #f8fafc;
+  border: 1px solid #cbd5e1;
   border-radius: 6px;
   font-size: 14px;
   color: var(--text-primary);
@@ -187,7 +189,7 @@ body[data-perfil="estudante"] .container {
 .form-group input:focus, .form-group select:focus {
   outline: none;
   border-color: var(--btn-primary);
-  box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.2);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15); /* Aureola azul */
   background: #fff;
 }
 
@@ -196,7 +198,7 @@ body[data-perfil="estudante"] .container {
   color: white;
   border: none;
   padding: 12px 16px;
-  border-radius: 8px;
+  border-radius: 6px;
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
@@ -206,7 +208,7 @@ body[data-perfil="estudante"] .container {
 .btn-primary:hover {
   background-color: var(--btn-primary-hover);
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(217, 119, 6, 0.3);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
 }
 
 .btn-primary:active { transform: translateY(0); }
@@ -215,7 +217,7 @@ body[data-perfil="estudante"] .container {
   background: none; border: none; color: var(--color-danger); padding: 10px 16px;
   font-size: 14px; font-weight: 600; cursor: pointer; width: 100%;
 }
-.btn-text:hover { background: #fef2f2; border-radius: 8px; }
+.btn-text:hover { background: #fef2f2; border-radius: 6px; }
 .btn-text.hidden { display: none; }
 
 /* ============================================================
@@ -229,14 +231,13 @@ body[data-perfil="estudante"] .container {
 
 .filters { display: flex; gap: 8px; flex-wrap: wrap; }
 .filter-btn {
-  background: #fff; border: 1px solid var(--border-color); padding: 8px 16px;
+  background: #fff; border: 1px solid var(--border-color); padding: 6px 14px;
   border-radius: 20px; font-size: 13px; color: var(--text-secondary); cursor: pointer;
   font-weight: 500; transition: all 0.2s;
 }
 .filter-btn:hover { border-color: var(--btn-primary); color: var(--btn-primary); }
 .filter-btn.active {
   background: var(--btn-primary); color: white; border-color: var(--btn-primary);
-  box-shadow: 0 4px 10px rgba(245, 158, 11, 0.25);
 }
 
 /* ============================================================
@@ -250,8 +251,8 @@ body[data-perfil="estudante"] .container {
 }
 .vaga-item:hover {
   transform: translateY(-4px);
-  box-shadow: 0 12px 20px -8px rgba(245, 158, 11, 0.3);
-  border-color: #fcd34d;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+  border-color: #cbd5e1;
 }
 
 .vaga-title { font-size: 17px; font-weight: 700; margin-bottom: 4px; color: var(--text-primary); }
@@ -259,7 +260,7 @@ body[data-perfil="estudante"] .container {
 .vaga-area {
   display: inline-block; font-size: 11px; font-weight: 700; padding: 4px 10px;
   border-radius: 12px; text-transform: uppercase; margin-bottom: 20px; align-self: flex-start;
-  background: #fef3c7; color: #b45309; border: 1px solid #fde68a;
+  background: #eff6ff; color: #1e40af; border: 1px solid #bfdbfe; /* Tag azul clara */
 }
 
 .vaga-footer {
@@ -273,21 +274,21 @@ body[data-perfil="estudante"] .container {
   background: #fff; border: 1px solid #e2e8f0; border-radius: 6px; padding: 6px;
   cursor: pointer; display: flex; align-items: center; color: #64748b; transition: all 0.2s;
 }
-.btn-icon:hover { background: #fef3c7; color: #d97706; border-color: #fde68a; transform: scale(1.05); }
+.btn-icon:hover { background: #f8fafc; color: #334155; border-color: #cbd5e1; transform: scale(1.05); }
 
 /* Botão de Candidatar */
 .btn-candidatar {
   background: var(--color-success); color: white; border: none; padding: 8px 16px;
-  border-radius: 8px; font-size: 13px; font-weight: 600; cursor: pointer;
+  border-radius: 6px; font-size: 13px; font-weight: 600; cursor: pointer;
 }
-.btn-candidatar:hover { background: #059669; transform: translateY(-2px); box-shadow: 0 4px 10px rgba(16, 185, 129, 0.3); }
+.btn-candidatar:hover { background: #059669; transform: translateY(-2px); box-shadow: 0 4px 10px rgba(16, 185, 129, 0.25); }
 
 /* Link/Botão Empresa */
 .candidatos-count {
   font-size: 13px; color: var(--btn-primary); font-weight: 600; cursor: pointer;
   padding: 4px 8px; border-radius: 4px; transition: 0.2s;
 }
-.candidatos-count:hover { background: #fef3c7; }
+.candidatos-count:hover { background: #eff6ff; }
 
 /* ============================================================
    MODAIS HTML5 E POP-UPS CUSTOMIZADOS
@@ -301,7 +302,7 @@ body[data-perfil="estudante"] .container {
   animation: modalFadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-.modal::backdrop { background: rgba(15, 23, 42, 0.4); backdrop-filter: blur(2px); }
+.modal::backdrop { background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(2px); }
 
 .modal-box {
   background: white; padding: 32px; width: 100vw; max-width: 500px;
@@ -340,7 +341,7 @@ body[data-perfil="estudante"] .container {
 .tabela-container { overflow-x: auto; border: 1px solid var(--border-color); border-radius: 8px; }
 .tabela-candidatos { width: 100%; border-collapse: collapse; font-size: 13px; }
 .tabela-candidatos th, .tabela-candidatos td { text-align: left; padding: 14px 16px; border-bottom: 1px solid var(--border-color); }
-.tabela-candidatos th { background: #fdfbf7; font-weight: 600; color: var(--text-secondary); }
+.tabela-candidatos th { background: #f8fafc; font-weight: 600; color: var(--text-secondary); }
 
 .badge-status { padding: 4px 10px; border-radius: 12px; font-size: 11px; font-weight: 700; }
 .status-analise { background: #fef3c7; color: #b45309; }
@@ -348,7 +349,7 @@ body[data-perfil="estudante"] .container {
 .status-rejeitado { background: #fee2e2; color: #991b1b; }
 
 .btn-status {
-  border: 1px solid transparent; background: #f8fafc; padding: 6px 10px; border-radius: 6px;
+  border: 1px solid transparent; background: #f1f5f9; padding: 6px 10px; border-radius: 6px;
   cursor: pointer; font-size: 12px; margin-right: 4px; font-weight: 600; transition: 0.2s;
 }
 .btn-status.ap { color: var(--color-success); border-color: #a7f3d0; }
