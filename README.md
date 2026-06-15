@@ -1,54 +1,86 @@
-# EstagiaTech - Plataforma de Vagas de Estágio
+<div align="center">
+  <img src="https://img.icons8.com/?size=100&id=103424&format=png&color=000000" alt="EstagiaTech Logo" width="80" />
+  <h1>EstagiaTech</h1>
+  <p><strong>A ponte definitiva entre Talentos Acadêmicos e Oportunidades de Estágio</strong></p>
 
-Este projeto foi desenvolvido como trabalho avaliativo para a disciplina de **Programação para a Internet (PPI)**. O **EstagiaTech** é um sistema projetado para conectar alunos em busca de estágio e empresas oferecendo oportunidades no mercado.
+  [![Status](https://img.shields.io/badge/Status-Finalizado-success.svg)](#)
+  [![Vercel](https://img.shields.io/badge/Deploy-Vercel-black?logo=vercel)](#)
+  [![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?logo=typescript&logoColor=white)](#)
+</div>
 
-**Acesso Rápido:**
-- **Ambiente de Produção (Vercel):** [https://estagiatechppi.vercel.app](https://estagiatechppi.vercel.app)
+<br />
 
----
-
-## Proposta do Projeto
-
-O sistema simula o fluxo completo de publicação de vagas e candidaturas em uma interface centralizada:
-
-- **Área do Estudante**: Visualiza as vagas disponíveis no mural, filtra oportunidades por área de atuação (Frontend, Backend, Data, Mobile) e realiza inscrições preenchendo o formulário de candidatura.
-- **Área da Empresa**: Permite a publicação de novas vagas, edição ou remoção das oportunidades ativas e gestão dos estudantes inscritos, podendo alterar o status das candidaturas para Aprovado ou Rejeitado.
-
-## Tecnologias Utilizadas
-
-Para garantir a leveza e atender aos requisitos da disciplina, a stack tecnológica escolhida foi:
-
-- **Front-end**: HTML5, CSS3 responsivo (com abordagem Mobile-First) e TypeScript.
-- **Back-end**: API RESTful construída com Node.js e Express.
-- **Banco de Dados**: Simulado em memória (array objects) no lado do servidor para viabilizar testes e avaliações rápidas.
+> Projeto desenvolvido como trabalho avaliativo para a disciplina de **Programação para a Internet (PPI)**. O **EstagiaTech** visa centralizar e facilitar o processo de captação de estagiários pelas empresas, oferecendo uma interface fluida e de fácil usabilidade para os estudantes.
 
 ---
 
-## Como executar o projeto localmente
+## 📌 Links Rápidos
 
-Para rodar a aplicação em seu ambiente de desenvolvimento local, siga os passos abaixo:
-
-1. Certifique-se de ter o **Node.js** instalado na máquina.
-2. Abra seu terminal na raiz do projeto e navegue para a pasta do servidor:
-   ```bash
-   cd server
-   ```
-3. Instale todas as dependências necessárias:
-   ```bash
-   npm install
-   ```
-4. Inicie o servidor em modo de desenvolvimento:
-   ```bash
-   npm run dev
-   ```
-5. A aplicação estará rodando. Acesse em seu navegador: `http://localhost:3000`
+- **Ambiente de Produção:** [estagiatechppi.vercel.app](https://estagiatechppi.vercel.app)
+- **Documentação de Uso:** Consulte as seções abaixo para rodar localmente.
 
 ---
 
-## Equipe de Desenvolvimento
+## 💻 Painel Duplo (Estudante e Empresa)
+
+O sistema foi arquitetado para simular duas jornadas complementares em um único ambiente:
+
+### 🎓 Área do Estudante
+- **Mural de Oportunidades:** Visualização de todas as vagas ativas no sistema.
+- **Filtro de Especialidade:** Organização rápida por Frontend, Backend, Data ou Mobile.
+- **Inscrição Simplificada:** Preenchimento de formulário rápido de candidatura, exigindo apenas os dados mais essenciais para a vaga.
+
+### 🏢 Área da Empresa
+- **Gestão de Vagas:** Criação de novos anúncios de estágio.
+- **Painel de Moderação:** Interface de listagem de todos os currículos/dados recebidos.
+- **Fluxo de Aprovação:** Ferramenta interativa de aprovação e rejeição de candidatos.
+
+---
+
+## 🚀 Tecnologias e Arquitetura
+
+O sistema priorizou a leveza e a responsividade (Mobile-First):
+
+| Camada | Tecnologia | Propósito |
+| :--- | :--- | :--- |
+| **Front-end** | HTML5, CSS3, TypeScript | Interface fluida, sem frameworks complexos, focada em manipulação pura do DOM e usabilidade nativa. |
+| **Back-end** | Node.js, Express | API RESTful rápida e escalável para gerenciar a persistência das vagas e inscrições. |
+| **Persistência** | Memória Local | Estrutura simulada via Arrays e Objetos no servidor, para facilidade de testes didáticos. |
+
+---
+
+## ⚙️ Como executar o projeto localmente
+
+Deseja rodar ou contribuir com o projeto em sua máquina? O processo é muito simples:
+
+**1.** Certifique-se de ter o **Node.js** instalado na máquina.  
+**2.** Abra o terminal na raiz do projeto e navegue para a pasta principal do servidor:
+```bash
+cd server
+```
+
+**3.** Instale todas as dependências necessárias de forma automatizada:
+```bash
+npm install
+```
+
+**4.** Inicialize o servidor local em modo de desenvolvimento:
+```bash
+npm run dev
+```
+
+**5.** A API e o portal Front-end estarão disponíveis. Acesse em seu navegador:
+> [http://localhost:3000](http://localhost:3000)
+
+---
+
+## 👥 Equipe de Desenvolvimento
+
+O projeto foi inteiramente arquitetado e concebido pelos alunos abaixo para fins acadêmicos:
 
 - **Ronald Cussati Cesar da Fonseca**
 - **Leonarda Candal de Carvalho**
 
-**Disciplina:** Programação para a Internet (PPI)
-**Professor:** Edgard da Cunha Pontes
+**Instituição:** Faculdade Multivix  
+**Disciplina:** Programação para a Internet (PPI)  
+**Professor Responsável:** Edgard da Cunha Pontes
