@@ -46,7 +46,7 @@
 }
 
 body {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Poppins', sans-serif;
   background: var(--bg-gradient);
   background-attachment: fixed;
   color: var(--text-primary);
@@ -235,6 +235,12 @@ body[data-perfil="estudante"] .container {
   color: var(--text-secondary);
 }
 
+.asterisk {
+  color: var(--color-danger);
+  font-weight: 700;
+  margin-left: 2px;
+}
+
 .form-group input, .form-group select {
   width: 100%;
   padding: 10px 12px;
@@ -264,6 +270,7 @@ body[data-perfil="estudante"] .container {
   font-weight: 600;
   cursor: pointer;
   width: 100%;
+  box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.2), 0 2px 4px -1px rgba(37, 99, 235, 0.1);
 }
 
 .btn-primary:hover {
@@ -445,6 +452,7 @@ body[data-perfil="estudante"] .container {
   font-size: 12px; 
   font-weight: 600; 
   cursor: pointer;
+  box-shadow: 0 4px 6px -1px rgba(16, 185, 129, 0.2), 0 2px 4px -1px rgba(16, 185, 129, 0.1);
 }
 
 .btn-candidatar:hover { 
