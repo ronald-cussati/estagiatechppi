@@ -4,8 +4,6 @@ node_modules/
 ANTIGRAVITY_CONTEXT.md
 .agents/
 .gemini/
-dist/
 server/dist/
-
 favicon/
 favicon.zip

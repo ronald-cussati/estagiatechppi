@@ -52,6 +52,8 @@ body {
   color: var(--text-primary);
   line-height: 1.5;
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 /* Apenas os botões e os cards pulam de leve ao passar o mouse */
@@ -102,11 +104,12 @@ button, .card, .vaga-item {
   align-items: center;
 }
 
-.logo-title-row {
+.logo-title-col {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 8px;
-  margin-bottom: 2px;
+  gap: 2px;
+  margin-bottom: 8px;
 }
 
 .header-logo-icon {
@@ -116,15 +119,21 @@ button, .card, .vaga-item {
 }
 
 .logo-area h1 { 
-  font-size: 22px; 
-  font-weight: 700; 
-  color: #fff; 
-  letter-spacing: -0.025em;
+  display: none; /* Ignora o H1 comum anterior */
+}
+
+.premium-title {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 700;
+  font-size: 28px !important;
+  color: #fff;
+  letter-spacing: -0.5px;
+  margin: 0;
+  display: block !important;
 }
 
 .logo-area p { 
-  font-size: 13px; 
-  color: #cbd5e1; 
+  display: none; /* Remove o subtítulo */
 }
 
 .role-selector {
@@ -177,6 +186,7 @@ button, .card, .vaga-item {
   margin: 0 auto;
   padding: 0 16px 32px;
   display: grid;
+  flex: 1; /* Estica a div e empurra o footer para baixo */
   grid-template-columns: 1fr; /* Mobile-first: 1 coluna */
   gap: 24px;
   align-items: start;

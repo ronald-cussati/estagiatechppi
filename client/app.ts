@@ -198,7 +198,7 @@ function resetarFormulario() {
 // Pede (GET) a lista de vagas para a API no localhost:3000
 async function fetchVagas() {
   try {
-    const resposta = await fetch('http://localhost:3000/vagas');
+    const resposta = await fetch('/vagas');
     vagasGlobal = await resposta.json(); // Pega a resposta e transforma em objeto do JavaScript
     renderVagas(); // Renderiza os "cards" na tela
   } catch (erro) {
@@ -228,7 +228,7 @@ formVaga.addEventListener('submit', async (evento) => {
   try {
     if (idEdicao) {
       // Se houver um idEdicao, significa que é o Modo Edição (PUT)
-      await fetch(`http://localhost:3000/vagas/${idEdicao}`, {
+      await fetch(`/vagas/${idEdicao}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(dados)
@@ -236,7 +236,7 @@ formVaga.addEventListener('submit', async (evento) => {
       await mostrarAlerta('Vaga editada com sucesso!', 'sucesso');
     } else {
       // Caso contrário, é criar uma nova vaga (POST)
-      await fetch('http://localhost:3000/vagas', {
+      await fetch('/vagas', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(dados)
@@ -258,7 +258,7 @@ formVaga.addEventListener('submit', async (evento) => {
   if (!confirmacao) return; // Cai fora se clikou "Cancelar"
 
   try {
-    await fetch(`http://localhost:3000/vagas/${id}`, { method: 'DELETE' });
+    await fetch(`/vagas/${id}`, { method: 'DELETE' });
     await mostrarAlerta('Vaga excluída permanentemente.', 'sucesso');
     fetchVagas();
   } catch (erro) {
@@ -317,7 +317,7 @@ formCandidatura.addEventListener('submit', async (e) => {
   };
 
   try {
-    const res = await fetch('http://localhost:3000/candidaturas', {
+    const res = await fetch('/candidaturas', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload)
@@ -345,7 +345,7 @@ formCandidatura.addEventListener('submit', async (e) => {
 
   try {
     // Buscar todos os estudantes atrelados àquela vaga específica
-    const resposta = await fetch(`http://localhost:3000/candidaturas/${idVaga}`);
+    const resposta = await fetch(`/candidaturas/${idVaga}`);
     const candidatos: ICandidatura[] = await resposta.json();
     
     listaInscritos.innerHTML = '';
@@ -395,7 +395,7 @@ formCandidatura.addEventListener('submit', async (e) => {
   
   try {
     // PUT é usado na REST API para Atualizações (Updates)
-    await fetch(`http://localhost:3000/candidaturas/${idCandidatura}/status`, {
+    await fetch(`/candidaturas/${idCandidatura}/status`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ status: novoStatus })
