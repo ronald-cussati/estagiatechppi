@@ -1,9 +1,8 @@
 <div align="center">
-  <img src="https://img.icons8.com/?size=100&id=103424&format=png&color=000000" alt="EstagiaTech Logo" width="80" />
+  <img src="https://i.imgur.com/xFoM7nV.png" alt="EstagiaTech Logo" width="120" />
   <h1>EstagiaTech</h1>
   <p><strong>A ponte definitiva entre Talentos Acadêmicos e Oportunidades de Estágio</strong></p>
 
-  [![Status](https://img.shields.io/badge/Status-Finalizado-success.svg)](#)
   [![Vercel](https://img.shields.io/badge/Deploy-Vercel-black?logo=vercel)](#)
   [![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?logo=typescript&logoColor=white)](#)
 </div>
@@ -14,30 +13,30 @@
 
 ---
 
-## 📌 Links Rápidos
+## Links Rápidos
 
 - **Ambiente de Produção:** [estagiatechppi.vercel.app](https://estagiatechppi.vercel.app)
 - **Documentação de Uso:** Consulte as seções abaixo para rodar localmente.
 
 ---
 
-## 💻 Painel Duplo (Estudante e Empresa)
+## Painel Duplo (Estudante e Empresa)
 
 O sistema foi arquitetado para simular duas jornadas complementares em um único ambiente:
 
-### 🎓 Área do Estudante
+### Área do Estudante
 - **Mural de Oportunidades:** Visualização de todas as vagas ativas no sistema.
 - **Filtro de Especialidade:** Organização rápida por Frontend, Backend, Data ou Mobile.
 - **Inscrição Simplificada:** Preenchimento de formulário rápido de candidatura, exigindo apenas os dados mais essenciais para a vaga.
 
-### 🏢 Área da Empresa
+### Área da Empresa
 - **Gestão de Vagas:** Criação de novos anúncios de estágio.
 - **Painel de Moderação:** Interface de listagem de todos os currículos/dados recebidos.
 - **Fluxo de Aprovação:** Ferramenta interativa de aprovação e rejeição de candidatos.
 
 ---
 
-## 🚀 Tecnologias e Arquitetura
+## Tecnologias e Arquitetura
 
 O sistema priorizou a leveza e a responsividade (Mobile-First):
 
@@ -49,7 +48,7 @@ O sistema priorizou a leveza e a responsividade (Mobile-First):
 
 ---
 
-## ⚙️ Como executar o projeto localmente
+## Como executar o projeto localmente
 
 Deseja rodar ou contribuir com o projeto em sua máquina? O processo é muito simples:
 
@@ -71,16 +70,16 @@ npm run dev
 
 **5.** A API e o portal Front-end estarão disponíveis. Acesse em seu navegador:
 > [http://localhost:3000](http://localhost:3000)
-
 ---
 
-## 👥 Equipe de Desenvolvimento
+## Equipe de Desenvolvimento
 
 O projeto foi inteiramente arquitetado e concebido pelos alunos abaixo para fins acadêmicos:
 
 - **Ronald Cussati Cesar da Fonseca**
 - **Leonarda Candal de Carvalho**
 
-**Instituição:** Faculdade Multivix  
+**Instituição:** Faculdade Multivix
+**Curso:** Sistemas de Informação
 **Disciplina:** Programação para a Internet (PPI)  
 **Professor Responsável:** Edgard da Cunha Pontes
